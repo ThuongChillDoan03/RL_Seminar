@@ -1,0 +1,36 @@
+def env_state():
+    env[0:10] : lá bài còn trên bàn(chỉ quan tâm đến điểm của nó)
+    env[10:17] : số tiền còn lại của mỗi player (cái: 10000 và p_state: 1000)
+    env[17:23] : cược của mỗi p_state
+    env[23:37] : tình trạng còn được chơi nữa ko
+    env[37:177] : bài trên tay người chơi
+    env[177:191] : điểm
+    env[191:197] : số game nhỏ đã thắng
+    env[197] : số game nhỏ đã chạy qua (max 30 small --> big)
+    env[198] : check_end (1 là end, 0 là chưa)
+    env[199] : bộ bài của agent đang được nhận action
+    env[200] : lá thứ 2 cái úp xuống
+    env[201] : turn
+
+def getAgentstate(env_state): #agent có thể nhìn thấy phục vụ cho agent train
+    p_state[:10] = env[:10] : lá bài còn trên bàn
+    p_state[10:150] = env[37:177] : bài trên tay các người chơi, chuyển về a0
+    p_state[150:164] = env[177:191] : số điểm của mỗi bộ bài
+    p_state[164:171] = env[10:17] : số tiền còn lại của mỗi player
+    p_state[171] = env[197] : số ván nhỏ đã chơi
+    p_state[172] = env[199] : bộ nào đang được action
+    p_state[173]: số tiền đã cược
+    p_state[174] = env[198]
+
+
+def getActionsize(p_state):
+    action[0] : cược 10
+    action[1] : cược 20
+    action[2] :cược 50
+    action[3] : cược 100
+    action[4] : bỏ lượt
+    action[5] : Lấy 1 lá
+    action[6] : x2 tiền cược rồi lấy 1 lá và dừng bài(phát đầu tiên luôn)
+    action[7] : tách thành 2 bộ bài và ko đc x2 tiền nữa, chỉ đc phép lấy lá mới và dừng bài(phát đầu tiên luôn)
+    action[8] : action của cái
+
